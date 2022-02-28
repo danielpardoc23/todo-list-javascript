@@ -1,0 +1,70 @@
+#titulo {
+    color: red;
+    margin-bottom: 30px;
+    margin-top:30px;
+    text-align: center;
+}
+
+.lista::-webkit-scrollbar {
+    width: 12px;
+}
+  
+.lista::-webkit-scrollbar-track {
+    background: orange;
+    border-radius: 50px;
+}
+  
+.lista::-webkit-scrollbar-thumb {
+    background-color: blue;
+    border-radius: 30px;
+    border: 3px solid orange;
+}
+
+#listaPrincipal{
+    padding-left: 30px;
+    height: 700px;
+    overflow-y: scroll;
+}
+
+#listaPrincipal::-webkit-scrollbar {
+    width: 12px;
+}
+  
+#listaPrincipal::-webkit-scrollbar-track {
+    background: orange;
+    border-radius: 50px;
+}
+  
+#listaPrincipal::-webkit-scrollbar-thumb {
+    background-color: blue;
+    border-radius: 30px;
+    border: 3px solid orange;
+}
+
+#nuevaTarea{
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+.lista{
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 30px;
+    height: 350px;
+    overflow-y: scroll;
+}
+
+#tarea{
+    border: 1px solid black;
+    border-radius: 15px;
+    margin-top:10px;
+    padding: 10px;
+}
+
+.lista button{
+    margin:8px;
+}
+
+#alerta{
+    display: none;
+}
