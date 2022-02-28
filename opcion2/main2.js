@@ -251,6 +251,13 @@ function drop(ev) {
     ev.preventDefault();
     var tarea = ev.dataTransfer.getData("text");
     ev.target.appendChild(document.getElementById(tarea));
+    let nuevoEstado = document.getElementById(tarea).parentNode.id;
+    for(let i = 0; i < list.length; i++){
+        if(tarea == list[i].name){
+            list[i].state = nuevoEstado
+        }
+    }
+    mostrarTodasLasListas();
 }
 
 mostrarTodasLasListas();
