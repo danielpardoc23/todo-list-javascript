@@ -52,12 +52,12 @@ const list = [
 function mostrarLista(){
     let cadena = "";
     for(let i = 0; i < list.length; i++){
-        cadena += "<div class='col-lg-4'>"
+        cadena += "<div class='col-lg-4 tareaListaPrincipal'>"
                         + "<ul>"
                             + "<li><h3>" + list[i].name + "</h3></li>"
                             + "<li>" + list[i].description + "</li>"
-                            + "<li>" + list[i].priority + "</li>"
-                            + "<li>" + list[i].state + "</li>"
+                            + "<li>Prioridad: " + list[i].priority + "</li>"
+                            + "<li>Estado: " + list[i].state + "</li>"
                         + "</ul>"
                 + "</div>"
     }
@@ -71,7 +71,7 @@ function addToStatedList(state){
             cadena += "<div class='row' id='tarea'>"
                         + "<div class='col-lg-6'>"
                             + "<h5>" + list[i].name + "</h5>"
-                            + "<ul>"
+                            + "<ul class='statedList'>"
                                 + "<li>" + list[i].description + "</li>"
                                 + "<li>Prioridad: " + list[i].priority + "</li>"
                                 + "<li>Estado: " + list[i].state + "</li>"
@@ -133,18 +133,6 @@ function addTask(){
     mostrarTodasLasListas();
 }
 
-function addAllStatedLists(){
-    addToStatedList("created");
-    addToStatedList("doing");
-    addToStatedList("done");
-    addToStatedList("deleted");
-}
-
-function mostrarTodasLasListas(){
-    mostrarLista();
-    addAllStatedLists();
-}
-
 function updateState(name){
     for(let i = 0; i < list.length; i++){
         if(name === list[i].name){
@@ -168,26 +156,28 @@ function deleteTask(name){
 }
 
 function deleteList(state){
-    let ok = confirm("¿Quiere eliminar la lista " + state + "?");
+    let ok = confirm("¿Quiere vaciar la lista " + state + "?");
     if(ok){
-        for(let i = 0; i < list.length; i++){
+        document.getElementById(state).innerHTML = "";
+        /*for(let i = 0; i < list.length; i++){
             if(list[i].state === state){
                 list.splice(i, 1);
             }
-        }   
+        }*/   
     }
-    mostrarTodasLasListas();
+    //mostrarTodasLasListas();
 }
 
-function actualizarListas(state){
-    let comparacion = state + "Nuevo";
-    let nuevoEstado = document.getElementById(comparacion).value;
-    for(let i = 0; i < list.length; i++){
-        if(list[i].state === state){
-            list[i].state = nuevoEstado;
-        }
-    }
-    mostrarTodasLasListas();
+function addAllStatedLists(){
+    addToStatedList("created");
+    addToStatedList("doing");
+    addToStatedList("done");
+    addToStatedList("deleted");
+}
+
+function mostrarTodasLasListas(){
+    mostrarLista();
+    addAllStatedLists();
 }
 
 mostrarTodasLasListas();
