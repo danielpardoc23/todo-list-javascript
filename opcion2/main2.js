@@ -68,24 +68,43 @@ function addToStatedList(state){
     cadena = '';
     for(let i = 0; i < list.length; i++){
             if(list[i].state === state){
-            cadena += "<div class='row' id='tarea'>"
-                        + "<div class='col-lg-6'>"
+            cadena += "<div draggable='true' class='row tarea' id='tarea'>"
+                        + "<div class='col-lg-7'>"
                             + "<h5>" + list[i].name + "</h5>"
-                            + "<ul class='statedList'>"
-                                + "<li>" + list[i].description + "</li>"
-                                + "<li>Prioridad: " + list[i].priority + "</li>"
-                                + "<li>Estado: " + list[i].state + "</li>"
-                            + "</ul>"
+                            + "<div class='statedList'>"
+                                + "<span>" + list[i].description + "</span><br>";
+                                if(list[i].priority === 1){
+                                    cadena += "<span>Prioridad: " + list[i].priority + "&nbsp;<button onclick='lessPriority(`" + list[i].name + "`)'>&#x2193;</button></span><br>";
+                                }else if(list[i].priority === 4){
+                                    cadena += "<span>Prioridad: " + list[i].priority + "&nbsp;<button onclick='morePriority(`" + list[i].name + "`)'>&#x2191;</button></span><br>"
+                                }else{
+                                    cadena += "<span>Prioridad: " + list[i].priority + "&nbsp;<button onclick='morePriority(`" + list[i].name + "`)'>&#x2191;</button> <button onclick='lessPriority(`" + list[i].name + "`)'>&#x2193;</button></span><br>";
+                                }
+                                cadena += "<span>Estado: " + list[i].state + "</span>"
                             + "</div>"
-                                + "<div class='col-lg-6'>"
-                                + "<label id='etiqueta' for='" + list[i].name +"'>Nuevo estado: &nbsp;&nbsp;</label>"
-                                + "<select id='" + list[i].name + "'>"
-                                    + "<option value='created'>Created</option>"
-                                    + "<option value='doing'>Doing</option>"
-                                    + "<option value='done'>Done</option>"
-                                + "</select><br>"
-                                + "<button onclick='updateState(`" + list[i].name + "`)' class='btn btn-primary botonTareaEstado'>Actualizar estado</button><br>"
-                                + "<button class='btn btn-danger botonTareaEliminar' onclick='deleteTask(`" + list[i].name + "`)'>Eliminar " + list[i].name + "</button>"
+                            + "</div>"
+                                + "<div class='col-lg-5'>";
+                                if(list[i].state !== "deleted"){
+                                    cadena += "<label id='etiqueta' for='" + list[i].name +"'>Nuevo estado: &nbsp;&nbsp;</label>"
+                                + "<select id='" + list[i].name + "'>";
+                                    if(list[i].state === 'created'){
+                                        cadena += "<option value='created' selected>Created</option>"
+                                                + "<option value='doing'>Doing</option>"
+                                                + "<option value='done'>Done</option>"
+                                    }else if(list[i].state === 'doing'){
+                                        cadena += "<option value='created'>Created</option>"
+                                                + "<option value='doing' selected>Doing</option>"
+                                                + "<option value='done'>Done</option>"
+                                    }else if(list[i].state === 'done'){
+                                        cadena += "<option value='created'>Created</option>"
+                                                + "<option value='doing'>Doing</option>"
+                                                + "<option value='done' selected>Done</option>"
+                                    }
+                                    
+                                cadena += "</select><br>"
+                                        + "<button onclick='updateState(`" + list[i].name + "`)' class='btn btn-primary botonTareaEstado'>Actualizar</button><br>"
+                                }
+                                cadena += "<button class='btn btn-danger botonTareaEliminar' onclick='deleteTask(`" + list[i].name + "`)'>&#128465;</button>"
                             + "</div>"
                     + "</div>";
         }
@@ -104,7 +123,6 @@ function orderList(){
             }
         }
     }
-    mostrarTodasLasListas();
 }
 
 function addTask(){
@@ -148,7 +166,11 @@ function deleteTask(name){
     if(ok){
         for(let i = 0; i < list.length; i++){
             if(name === list[i].name){
-                list[i].state = "deleted";
+                if(list[i].state === "deleted"){
+                    list.splice(i, 1);
+                }else{
+                    list[i].state = "deleted";
+                }
             }
         }
     }
@@ -158,14 +180,42 @@ function deleteTask(name){
 function deleteList(state){
     let ok = confirm("¿Quiere vaciar la lista " + state + "?");
     if(ok){
-        document.getElementById(state).innerHTML = "";
-        /*for(let i = 0; i < list.length; i++){
+        for(let i = 0; i < list.length; i++){
             if(list[i].state === state){
-                list.splice(i, 1);
+                list[i].state = "deleted";
             }
-        }*/   
+        }
     }
-    //mostrarTodasLasListas();
+    mostrarTodasLasListas();
+}
+
+function ocultar(state){
+    let contenedor = document.getElementById(state);
+    let estilos = window.getComputedStyle(contenedor);
+    let display = estilos.getPropertyValue('display');
+    if(display === "block"){
+        contenedor.style.display = 'none';
+    }else{
+        contenedor.style.display = 'block';
+    }
+}
+
+function morePriority(name){
+    for(let i = 0; i < list.length; i++){
+        if(list[i].name === name){
+            list[i].priority--;
+        }
+    }
+    mostrarTodasLasListas();
+}
+
+function lessPriority(name){
+    for(let i = 0; i < list.length; i++){
+        if(list[i].name === name){
+            list[i].priority++;
+        }
+    }
+    mostrarTodasLasListas();
 }
 
 function addAllStatedLists(){
@@ -176,6 +226,7 @@ function addAllStatedLists(){
 }
 
 function mostrarTodasLasListas(){
+    orderList();
     mostrarLista();
     addAllStatedLists();
 }

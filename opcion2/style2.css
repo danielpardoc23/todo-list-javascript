@@ -40,6 +40,8 @@ ul{
     border-radius: 15px;
     padding-left: 10px;
     margin-top: 10px;
+    cursor: move;
+    width: auto;
 }
 
 .contenedorLista{
@@ -85,4 +87,8 @@ ul{
 
 .tareaListaPrincipal{
     margin-bottom: 30px;
+}
+
+.contenedorTareas{
+    display:block;
 }
