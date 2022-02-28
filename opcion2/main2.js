@@ -56,7 +56,15 @@ function mostrarLista(){
                         + "<ul>"
                             + "<li><h3>" + list[i].name + "</h3></li>"
                             + "<li>" + list[i].description + "</li>"
-                            + "<li>Prioridad: " + list[i].priority + "</li>"
+                            + "<li>Prioridad: " + list[i].priority 
+                                if(list[i].priority === 1){
+                                    cadena += "&nbsp;<button onclick='lessPriority(`" + list[i].name + "`)'>&#x2193;</button>";
+                                }else if(list[i].priority === 4){
+                                    cadena += "&nbsp;<button onclick='morePriority(`" + list[i].name + "`)'>&#x2191;</button>";
+                                }else{
+                                    cadena += "&nbsp;<button onclick='morePriority(`" + list[i].name + "`)'>&#x2191;</button> <button onclick='lessPriority(`" + list[i].name + "`)'>&#x2193;</button>";
+                                }
+                            cadena += "</li>"
                             + "<li>Estado: " + list[i].state + "</li>"
                         + "</ul>"
                 + "</div>"
@@ -68,7 +76,7 @@ function addToStatedList(state){
     cadena = '';
     for(let i = 0; i < list.length; i++){
             if(list[i].state === state){
-            cadena += "<div draggable='true' class='row tarea' id='tarea'>"
+            cadena += "<div draggable='true' ondragstart='drag(event)' class='row tarea' id='"+ list[i].name +"'>"
                         + "<div class='col-lg-7'>"
                             + "<h5>" + list[i].name + "</h5>"
                             + "<div class='statedList'>"
@@ -106,7 +114,7 @@ function addToStatedList(state){
                                 }
                                 cadena += "<button class='btn btn-danger botonTareaEliminar' onclick='deleteTask(`" + list[i].name + "`)'>&#128465;</button>"
                             + "</div>"
-                    + "</div>";
+                    + "</div><br>";
         }
     }
     let sitio = document.getElementById(state);
@@ -229,6 +237,20 @@ function mostrarTodasLasListas(){
     orderList();
     mostrarLista();
     addAllStatedLists();
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+  
+  function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+  
+function drop(ev) {
+    ev.preventDefault();
+    var tarea = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(tarea));
 }
 
 mostrarTodasLasListas();

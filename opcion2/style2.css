@@ -35,11 +35,10 @@ ul{
     display: none;
 }
 
-#tarea{
+.tarea{
     border: 1px solid black;
     border-radius: 15px;
     padding-left: 10px;
-    margin-top: 10px;
     cursor: move;
     width: auto;
 }
@@ -67,6 +66,7 @@ ul{
 
 #listasConEstado{
     margin-top: 20px;
+    margin-left: 5px;
 }
 
 #createdContenedor{

@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="row" id="listasConEstado">
-        <div class="col-lg-3 contenedorLista" id="createdContenedor">
+        <div class="col-lg-3 contenedorLista" id="createdContenedor"  ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="row">
                 <div class="col-lg-10" class="contenedorTareas" id="createdTareas">
                     <h3>Created</h3>
@@ -50,14 +50,14 @@
 
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-2 botonera">
                     <button class="btn btn-warning" onclick="ocultar('createdTareas');">&#x1F441;</button>
                     <br><br>
                     <button id="eliminarCreadas" class="btn btn-danger" onclick="deleteList('created');">&#128465;</button></section>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 contenedorLista" id="doingContenedor">
+        <div class="col-lg-3 contenedorLista" id="doingContenedor"  ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="row">
                 <div class="col-lg-10" class="contenedorTareas" id="doingTareas">
                     <h3>Doing</h3>
@@ -65,14 +65,14 @@
 
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-2 botonera">
                     <button class="btn btn-warning" onclick="ocultar('doingTareas');">&#x1F441;</button>
                     <br><br>
                     <button id="eliminarRealizando" class="btn btn-danger" onclick="deleteList('doing');">&#128465;</button></section>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 contenedorLista" id="doneContenedor">
+        <div class="col-lg-3 contenedorLista" id="doneContenedor"  ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="row">
                 <div class="col-lg-10" class="contenedorTareas" id="doneTareas">
                     <h3>Done</h3>
@@ -80,14 +80,14 @@
 
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-2 botonera">
                     <button class="btn btn-warning" onclick="ocultar('doneTareas');">&#x1F441;</button>
                     <br><br>
                     <button id="eliminarHechas" class="btn btn-danger" onclick="deleteList('done');">&#128465;</button></section>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 contenedorLista" id="deletedContenedor">
+        <div class="col-lg-3 contenedorLista" id="deletedContenedor"  ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class="row">
                 <div class="col-lg-10" class="contenedorTareas" id="deletedTareas">
                     <h3>Deleted</h3>
@@ -95,7 +95,7 @@
 
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-2 botonera">
                     <button class="btn btn-warning" onclick="ocultar('deletedTareas');">&#x1F441;</button>
                     <br><br>
                     <button id="eliminarEliminadas" class="btn btn-danger" onclick="deleteList('deleted');">&#128465;</button></section>
