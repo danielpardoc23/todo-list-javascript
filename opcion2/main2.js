@@ -49,6 +49,31 @@ const list = [
     }
 ]
 
+function orderList(){
+    for(let i = 0; i < list.length; i++){
+        for(let j = 0; j < list.length; j++){
+            if(list[i].priority < list[j].priority){
+                let aux = list[i];
+                list[i] = list[j];
+                list[j] = aux; 
+            }
+        }
+    }
+}
+
+function addAllStatedLists(){
+    addToStatedList("created");
+    addToStatedList("doing");
+    addToStatedList("done");
+    addToStatedList("deleted");
+}
+
+function mostrarTodasLasListas(){
+    orderList();
+    mostrarLista();
+    addAllStatedLists();
+}
+
 function mostrarLista(){
     let cadena = "";
     for(let i = 0; i < list.length; i++){
@@ -119,18 +144,6 @@ function addToStatedList(state){
     }
     let sitio = document.getElementById(state);
     sitio.innerHTML = cadena;
-}
-
-function orderList(){
-    for(let i = 0; i < list.length; i++){
-        for(let j = 0; j < list.length; j++){
-            if(list[i].priority < list[j].priority){
-                let aux = list[i];
-                list[i] = list[j];
-                list[j] = aux; 
-            }
-        }
-    }
 }
 
 function addTask(){
@@ -226,19 +239,6 @@ function lessPriority(name){
     mostrarTodasLasListas();
 }
 
-function addAllStatedLists(){
-    addToStatedList("created");
-    addToStatedList("doing");
-    addToStatedList("done");
-    addToStatedList("deleted");
-}
-
-function mostrarTodasLasListas(){
-    orderList();
-    mostrarLista();
-    addAllStatedLists();
-}
-
 function allowDrop(ev) {
     ev.preventDefault();
 }
@@ -266,7 +266,6 @@ function drop(ev) {
             list[i].state = nuevoEstado
         }
     }
-    alert(nuevoEstado)
     mostrarTodasLasListas();
 }
 
